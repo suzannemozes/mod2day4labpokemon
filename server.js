@@ -12,20 +12,18 @@ app.get('/', (req, res) => {
 });
 
 app.get('/pokemon', (req, res) => {
-  // let name = s => s.charAt(0).toUpperCase() + s.slice(1)//need to fix to get capped names
   res.render('Index', {pokemon: pokemon});
 });
 
-app.get('/pokemon/:id'), (req, res) => {
-res.send(req.params.id);
-    // res.send(fruits[req.params.indexOfFruitsArray]);
+// app.get('/pokemon/:id'), (req, res) => {
+// res.send(req.params.id);
+//   };
+app.get('/pokemon/:id', function(req, res) {
+  res.send(req.params.id)
+})
 
 
-}
 
-
-let fLCapital = s => s = s.charAt(0).toUpperCase() + s.slice(1);
-fLCapital('this is a test') 
 //our routes
 // app.get('/pokemon', function(req, res){
 //   res.send('Show', { //second param must be an object
