@@ -5,24 +5,18 @@ const myStyle = {
 };
 
 class Show extends React.Component {
+    
   render() {
-      const { pokemon } = this.props;
+    console.log(this.props)
+      const { pokemon } = this.props; // this.props is whatever index we passed in from the parent as a property (this.props is the way to refer to it in here)
+      console.log(pokemon.img)
       return (
               <div style={myStyle}>
                   <h1>Gotta Catch 'Em All</h1>
                   <h2>{pokemon.name}</h2>
-                  <img src={pokemon.img}></img>
-                  {/* <a href={/pokemon/}>back</a>
-              <ul>
-                      {pokemon.map((pokemon, i) => {
-                          return (
-                              <li>
-                                  <a href={`/pokemon/${i}`}>
-                                      {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</a>
-                              </li>
-                          );
-                      })}
-                  </ul> */}
+                  <img src={pokemon.img + '.jpg'}></img>
+                 <a href={/pokemon/}>back to index </a>
+              
               </div>
       )
   }
