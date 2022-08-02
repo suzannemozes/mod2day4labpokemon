@@ -12,8 +12,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/pokemon', (req, res) => {
+  res.send(pokemon);
+  let name = s => s.charAt(0).toUpperCase() + s.slice(1)
+  // req.params.total*(req.params.percentage/100)
+//   let fLCapital = s => s = s.charAt(0).toUpperCase() + s.slice(1);
+// fLCapital('this is a test') 
   res.render('Index', {pokemon: pokemon});
 });
+
+
+let fLCapital = s => s = s.charAt(0).toUpperCase() + s.slice(1);
+fLCapital('this is a test') 
 //our routes
 // app.get('/pokemon', function(req, res){
 //   res.send('Show', { //second param must be an object
