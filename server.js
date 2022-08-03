@@ -1,11 +1,23 @@
 const express = require ('express');
+const mongoose = require('mongoose')
 require('dotenv').config();
-const pokemon = require('./models/pokemon')
+const Pokemon = require('./models/Pokemon')
 const app = express();
 const port = process.env.PORT || 3003;
 
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.once('open', ()=> {
+    console.log('connected to mongo');
+});
+
+
+//midleware
+app.use(express.urlencoded({extended:true}));
+
+
+//setting up views
 app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
+app.engine('jsx', require('express-react-views').createEngine()); //Initializing our engine
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Pokemon App!');
@@ -19,8 +31,13 @@ app.get('/pokemon/new', (req, res)=>{
   res.render('New');
 });
 
-app.post('/fruits/', (req, res)=>{
-  res.send('received');
+app.post('/pokemon/', (req, res)=>{
+  if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is set to 'on'
+    req.body.readyToEat = true;
+} else { //if not checked, req.body.readyToEat is undefined
+    req.body.readyToEat = false;
+}
+fruits.push(req.body);
 });
 
 // app.get('/pokemon/:id'), (req, res) => {
