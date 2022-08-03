@@ -8,16 +8,24 @@ class Index extends React.Component {
   render() {
       const { pokemon } = this.props;
       return (
-              <div style={myStyle}>
-                  <h1>See All the Pokemon</h1>
-
-              <div style={myStyle}>My First React Component!</div>
-              <ul>
-                      {pokemon.map((pokemon, i) => {
+              <div>
+                <h1>Pokemon Index Page</h1>
+                <nav>
+                    <a href="/pokemon/new">Create a new pokemon</a>
+                  </nav>
+                <div style={myStyle}>My First React Component!</div>
+                <ul>
+                      {pokemon.map((pokemon) => {
+                        console.log(pokemon)
                           return (
                               <li>
-                                  <a href={`/pokemon/${i}`}>
-                                      {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</a>
+                                  <a href={`/pokemon/${pokemon.id}`}>
+                 
+                                      {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</a>{' '} is {pokemon.color}  <br></br>
+                                  {pokemon.readyToBattle
+                                      ? `It is ready to battle`
+                                      : `It is not ready to battle`}
+                                  <br />
                               </li>
                           );
                       })}
