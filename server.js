@@ -15,6 +15,14 @@ app.get('/pokemon', (req, res) => {
   res.render('Index', {pokemon: pokemon});
 });
 
+app.get('/pokemon/new', (req, res)=>{
+  res.render('New');
+});
+
+app.post('/fruits/', (req, res)=>{
+  res.send('received');
+});
+
 // app.get('/pokemon/:id'), (req, res) => {
 // res.send(req.params.id);
 //   };
