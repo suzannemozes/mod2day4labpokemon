@@ -24,7 +24,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/pokemon', (req, res) => {
-  res.render('Index', {pokemon: pokemon});
+  // res.render('Index', {pokemon: pokemon});
+  Pokemon.find({}, (error, allPokemon) => {
+    res.render('Index', { 
+      fruits: allPokemon
+  });
+});
 });
 
 app.get('/pokemon/new', (req, res)=>{
@@ -32,13 +37,22 @@ app.get('/pokemon/new', (req, res)=>{
 });
 
 app.post('/pokemon/', (req, res)=>{
-  if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is set to 'on'
-    req.body.readyToEat = true;
-} else { //if not checked, req.body.readyToEat is undefined
-    req.body.readyToEat = false;
-}
-fruits.push(req.body);
+    if(req.body.readyToBattle === 'on'){ //if checked, req.body.readyToEat is set to 'on'
+        req.body.readyToBattle = true;
+    } else { //if not checked, req.body.readyToEat is undefined
+        req.body.readyToBattle = false;
+    }
+    Fruit.create(req.body, (error, createdPokemon)=>{
+        res.send(createdPokemon);
+    });
 });
+//   if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is set to 'on'
+//     req.body.readyToEat = true;
+// } else { //if not checked, req.body.readyToEat is undefined
+//     req.body.readyToEat = false;
+// }
+// fruits.push(req.body);
+// });
 
 // app.get('/pokemon/:id'), (req, res) => {
 // res.send(req.params.id);
