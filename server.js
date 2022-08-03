@@ -43,7 +43,7 @@ app.post('/pokemon/', (req, res)=>{
         req.body.readyToBattle = false;
     }
     Pokemon.create(req.body, (error, createdPokemon)=>{
-        res.send(createdPokemon);
+        res.redirect("/pokemon");
     });
 });
 //   if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is set to 'on'
