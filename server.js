@@ -27,7 +27,7 @@ app.get('/pokemon', (req, res) => {
   // res.render('Index', {pokemon: pokemon});
   Pokemon.find({}, (error, allPokemon) => {
     res.render('Index', { 
-      fruits: allPokemon
+      pokemon: allPokemon
   });
 });
 });
@@ -42,7 +42,7 @@ app.post('/pokemon/', (req, res)=>{
     } else { //if not checked, req.body.readyToEat is undefined
         req.body.readyToBattle = false;
     }
-    Fruit.create(req.body, (error, createdPokemon)=>{
+    Pokemon.create(req.body, (error, createdPokemon)=>{
         res.send(createdPokemon);
     });
 });
@@ -58,7 +58,12 @@ app.post('/pokemon/', (req, res)=>{
 // res.send(req.params.id);
 //   };
 app.get('/pokemon/:id', function(req, res) {
-  res.render('Show', {pokemon: pokemon[req.params.id]}); //sending whole array
+  Pokemon.findById(req.params.id, (err, foundPokemon) => {
+    res.render('Show', {
+        pokemon: foundPokemon
+    })
+
+})
 })
 
 
