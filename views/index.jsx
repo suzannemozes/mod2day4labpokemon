@@ -27,6 +27,8 @@ class Index extends React.Component {
                                       ? `It is ready to battle`
                                       : `It is not ready to battle`}
                                   <br />
+                                  <form action={`/pokemon/${pokemon.id}`} method="POST"><button type="submit">Delete</button></form>
+                                  <a href={`/pokemon/${pokemon.id}/edit`}>Edit pokemon</a>
                               </li>
                           );
                       })}

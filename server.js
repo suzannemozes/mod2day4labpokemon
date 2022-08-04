@@ -4,6 +4,7 @@ require('dotenv').config();
 const Pokemon = require('./models/pokemon')
 const app = express();
 const port = process.env.PORT || 3003;
+const methodOverride = require('method-override')
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', ()=> {
@@ -13,11 +14,18 @@ mongoose.connection.once('open', ()=> {
 
 //midleware
 app.use(express.urlencoded({extended:true}));
-
+app.use(methodOverride('_method'))
 
 //setting up views
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine()); //Initializing our engine
+
+
+//seed route
+app.get('/pokemon/seed', (req, res) => {
+  //Comment the line below if you don't want to delete your whole entire collection
+  Pokemon.deleteMany({})
+})
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Pokemon App!');
@@ -46,41 +54,48 @@ app.post('/pokemon/', (req, res)=>{
         res.redirect("/pokemon");
     });
 });
-//   if(req.body.readyToEat === 'on'){ //if checked, req.body.readyToEat is set to 'on'
-//     req.body.readyToEat = true;
-// } else { //if not checked, req.body.readyToEat is undefined
-//     req.body.readyToEat = false;
-// }
-// fruits.push(req.body);
-// });
 
-// app.get('/pokemon/:id'), (req, res) => {
-// res.send(req.params.id);
-//   };
+
 app.get('/pokemon/:id', function(req, res) {
   Pokemon.findById(req.params.id, (err, foundPokemon) => {
     res.send(foundPokemon)
     
-    // render('Show', {
-    //     pokemon: foundPokemon
-    // })
-
-})
+  })
 })
 
+//Edit Page
+app.get('/pokemon/:id/edit', (req, res) => {
+  Pokemon.findById(req.params.id, (error, foundPokemon) => {
+    if(!error) {
+      res.render('Edit', {
+        pokemon: foundPokemon
+      })
+    } else {
+      res.send({
+        message: error.message
+      })
+    }
+  })
+})
 
 
-//our routes
-// app.get('/pokemon', function(req, res){
-//   res.send('Show', { //second param must be an object
-//       fruit: fruits[req.params.indexOfFruitsArray] //there will be a variable available inside the ejs file called fruit, its value is fruits[req.params.indexOfFruitsArray]
-//   });
-// });    
+// Update route
+app.put('/pokemon/:id', (req, res) => {
+  Pokemon.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+  }, (error, pokemon) => {
+      res.redirect(`/pokemon/${req.params.id}`)
+  })
+})
 
-// //add show route
-// app.get('/fruits/:indexOfFruitsArray', (req, res) => {
-//   res.send(fruits[req.params.indexOfFruitsArray]);
-// });
+//delete route
+app.delete('/pokemon/:id', (req, res) => {
+  console.log('we are deleting')
+  Pokemon.findByIdAndRemove(req.params.id, (err, data) => {
+      res.redirect('/pokemon')
+  })
+})
+
 
 //our port
 app.listen(3000, () => {
