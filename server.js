@@ -59,9 +59,11 @@ app.post('/pokemon/', (req, res)=>{
 //   };
 app.get('/pokemon/:id', function(req, res) {
   Pokemon.findById(req.params.id, (err, foundPokemon) => {
-    res.render('Show', {
-        pokemon: foundPokemon
-    })
+    res.send(foundPokemon)
+    
+    // render('Show', {
+    //     pokemon: foundPokemon
+    // })
 
 })
 })

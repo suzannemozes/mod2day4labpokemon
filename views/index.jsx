@@ -19,6 +19,7 @@ class Index extends React.Component {
                         console.log(pokemon)
                           return (
                               <li>
+                                   The{' '}
                                   <a href={`/pokemon/${pokemon.id}`}>
                  
                                       {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</a>{' '} is {pokemon.color}  <br></br>
