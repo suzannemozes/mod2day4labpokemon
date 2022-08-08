@@ -37,6 +37,7 @@ app.get('/pokemon/seed', async (req, res) => {
   res.redirect('/pokemon');
 })
 
+//signature for git route, we want it to send up "Welcome"
 app.get('/', (req, res) => {
   res.send('Welcome to the Pokemon App!');
 });
@@ -107,7 +108,8 @@ app.delete('/pokemon/:id', (req, res) => {
 })
 
 
-//our port
+//being ref'd to a variable stated above, port variable that was set is being sent to this port 
+//when you add the http it will show up as a hyperlink in the terminal and take you directly to the site
 app.listen(3000, () => {
-    console.log('listening');
+    console.log(`listening on http://localhost:${port}`);
 });
