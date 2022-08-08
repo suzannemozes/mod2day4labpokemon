@@ -15,8 +15,8 @@ class Show extends React.Component {
                   <h1>Pokemon Show Page</h1>
                   <h2>{pokemon.name}</h2>
                   <img src={pokemon.img + '.jpg'}></img>
-                 <a href={/pokemon/}>back to index </a>
-              
+                  <a href={/pokemon/}> back to index </a>
+               
               </div>
       )
   }

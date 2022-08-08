@@ -5,12 +5,13 @@ const Pokemon = require('./models/pokemon')
 const app = express();
 const port = process.env.PORT || 3003;
 const methodOverride = require('method-override')
+const pokemonDate = require('./utilities/pokemonData')
 
+//DB Connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', ()=> {
     console.log('connected to mongo');
 });
-
 
 //midleware
 app.use(express.urlencoded({extended:true}));
@@ -20,11 +21,20 @@ app.use(methodOverride('_method'))
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine()); //Initializing our engine
 
-
 //seed route
-app.get('/pokemon/seed', (req, res) => {
-  //Comment the line below if you don't want to delete your whole entire collection
-  Pokemon.deleteMany({})
+// app.get('/pokemon/seed', (req, res) => {
+//   //Comment the line below if you don't want to delete your whole entire collection
+//   Pokemon.deleteMany({})
+//   //Creat a listof pokemon into our database
+//   Pokemon.create(pokemonData)
+//   process.ext()
+// })
+
+app.get('/pokemon/seed', async (req, res) => {
+  await Pokemon.deleteMany({}); //Clear database
+  await Pokemon.create(pokemonData);
+  // await Pokemon.deleteMany({name: /saur/}); //This will filter out all pokemon with 'saur'. We don't really need it. Just showing what it can do
+  res.redirect('/pokemon');
 })
 
 app.get('/', (req, res) => {
