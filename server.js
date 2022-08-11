@@ -74,6 +74,7 @@ app.post("/pokemon/", (req, res) => {
     //    res.send(createdPokemon);
   });
 });
+
 //Show route
 app.get("/pokemon/:id", (req, res) => {
   Pokemon.findById(req.params.id, (err, foundPokemon) => {
