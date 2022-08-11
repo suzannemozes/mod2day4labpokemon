@@ -6,11 +6,10 @@ class Index extends React.Component {
       return(
           <html >
           <head>
-              <title>Pokemon</title>
+              <title>Pokemon Index</title>
           </head>
           <body >
-              <h1>See All The Pokemon!</h1><br/>
-              <h3>Click the Pokeball to view Pokemon!!!</h3>
+              <h1>Pokemon Index Page</h1><br/>
               <ul>
                   {pokemon.map((mons) => {
                       return (

@@ -6,11 +6,10 @@ class Home extends React.Component {
         return (
             <html>
             <head>
-                <title>PokeDex</title>
+                <title>Pokemon Collection</title>
             </head>
             <body >
-                <h1 >Pokedex!</h1>
-                <h3>What would you like to do?</h3>
+                <h1 >Pokemon Collection</h1>
                 <div>
                     <a href='/pokemon'><button><h3>View Pokemon</h3></button></a>
                     <a href='/pokemon/new'><button><h3>Add New Entry</h3></button></a>
