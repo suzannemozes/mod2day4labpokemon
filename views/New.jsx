@@ -2,16 +2,23 @@ const React = require('react');
 
 class New extends React.Component {
   render() {
-    return (
-        <div>
-            <h1>New Pokemon Page</h1>
-            <form action="/pokemon" method="POST">
-                Name: <input type="text" name="name" /><br/>
-                Color: <input type="text" name="color" /><br/>
-                Is Ready To Battle: <input type="checkbox" name="readyToBattle" /><br/>
-                <input type="submit" name="" value="Create Pokemon"/>
-             </form>
-        </div>);
+      return (
+          <html>
+          <head>
+              <title>New Pokemon!</title>
+          </head>
+          <body >
+              <h1>You Discovered A New Pokemon!!</h1>
+              <h3>Tell me about the Pokemon!</h3>
+                  {/* NOTE: action will be the route, method will be the HTTP verb */}
+                  <form action="/pokemon" method="POST">
+                      Name: <input type="text" name="name" placeholder='Name'/><br/>
+                      Image: <input type="text" name="img" placeholder='Image URL' /><br/>
+                      <input type="submit" name="" value="Submit Entry"/>
+                  </form>
+          </body>
+          </html>
+      );
   }
 }
 
